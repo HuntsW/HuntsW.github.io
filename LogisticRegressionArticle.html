@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<!--
+	Solid State by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Why is logistic regression a classification algorithm?</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>html {scroll-behavior: smooth;}</style>
+    </head>
+	<body class="is-preload">
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">Analytics Portfolio</a></h1>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<div class="inner">
+							<h2>Menu</h2>
+							<ul class="links">
+								<li><a href="index.html">Home</a></li>
+								<li><a href="projects.html">Projects</a></li>
+								<li><a href="elements.html">Elements</a></li>
+							</ul>
+							<a href="#" class="close">Close</a>
+						</div>
+					</nav>
+
+				<!-- Wrapper -->
+					<section id="wrapper">
+						<header>
+							<section id="banner">
+								<div class="inner">
+									<h2>Why is logistic regression a classification algorithm?</h2>
+									<p>Tracing the origins of a seemingly contradictory classification</p>
+								</div>
+							</section>
+						</header>
+
+						<!-- Content -->
+							<div class="wrapper">
+                                <div class="inner">
+                                    <h3>Introduction</h3>
+                                    <p id="1">&emsp;&emsp;When introducing machine learning models to newcomers, we often begin by showing the fine distinction between classification and regression algorithms, and following up by giving some examples and maybe even demonstrations of models that fall under those two groupings. Most commonly, we begin this discussion with the linear and logistic regression models as an example for regression and classification algorithms respectively.</p>
+                                    <div class="col-12"><span class="image fit"><img src="images/captures.PNG" alt="Incorrect classification?" /></span></div>
+                                    <p>&emsp;&emsp;It is at this point that the newcomers reach a rather strange aspect of modelling in data science and analytics, that is – how on Earth are linear <b>regression</b> and logistic <b>regression</b> not both regression algorithms?! In fact, many sources online will simply introduce logistic regression as a classification algorithm and give no further explanation as to why that is the case. <a href="#n1"><b>[1]</b></a></p>
+                                    <p>&emsp;&emsp;This article seeks to put this inconsistency to rest, and hopefully we can all walk away with a better appreciation for what goes on under the hood when you call LogisticRegression() from your preferred library.</p>
+
+                                    <h3>Recap on Regression and Classification Algorithm</h3>
+                                    <p>&emsp;&emsp;First things first, let’s make sure we all understand the difference between a regression and a classification algorithm.</p>
+                                    <p>&emsp;&emsp;In general, regression algorithms are defined as algorithms that aim to form predictions on continuous variables, while classification algorithms work on discrete variables. More specifically, they both attempt to figure out a mapping function that maps some set of input variables into some output variable Y, in various forms depending on the specific model used.</p>
+                                    <p>So a regression algorithm’s job is to regress the inputs into some continuous estimate,</p>
+                                    <p style="text-align:center; margin-bottom:0;"><span class="image"><img src="images/linear_regression_gif.gif" alt="Linear Regression GIF" width="400" height="400"/></span></span></p>
+                                    <p style="text-align:center;"><a href="https://mlfromscratch.com/linear-regression-from-scratch/#/" target="_blank">GIF source: https://mlfromscratch.com/linear-regression-from-scratch/#/</a></p>
+
+                                    <p>And a classification algorithm’s job is to classify the inputs into some discrete grouping,</p>
+                                    <p style="text-align:center; margin-bottom:0;"><span class="image"><img src="images/svmregression.gif" alt="SVM GIF" width="450" height="400"/></span></span></p>
+                                    <p style="text-align:center;"><a href="https://www.mql5.com/en/articles/584" target="_blank">GIF source: https://www.mql5.com/en/articles/584</a></p>
+                                    <p>&emsp;&emsp;Other than that, there really isn’t much else to distinguish regression and classification algorithms. Although depending on your definitions, some overlap may exist between the two groups, as we will soon see in the case of logistic regression.</p>
+
+									<h3>What is Logistic Regression?</h3>
+									<p><span class="image right"><img src="images/PPN129323640_0018-55_page-0001.jpg" alt="" width="360" height="420"/></span>&emsp;&emsp;Now to understand what logistic regression is, let’s first try to parse out what each word in the phrase means. This, as you will soon see, leads us into a surprisingly messy and intriguing tale of 19th and 20th century mathematics.</p>
+									<p id="2">&emsp;&emsp;The logistic function and the term ‘logistic’ were first used in a series of papers by French mathematician Pierre Francois Verhulst, as a means to mathematically describe the growth of a population under resource constraints.</p>
+									<p>&emsp;&emsp;Strangely, Verhulst never did provide any reason for choosing the word ‘logistique’ which seems to have etymological ties with the Greek word for logic. Leading many to hypothesize that it was simply chosen as a way to contrast it with the ‘logarithmique’ function that he uses to describe population growth without resource constraints, as well as to passive aggressively call such a growth pattern illogical. <a href="#n2"><b>[2]</b></a></p>
+									<p id="3&4">&emsp;&emsp;Despite this shaky foundation, the name stuck. Eventually, another mathematician by the name of Joseph Berkson, would build upon the logistic function to create a unit of measurement known as log-odds or logits (logistic units). This is done by taking the inverse of the logistic function in order to turn probability values that range from 0 to 1 into real numbers that range from -∞ to +∞. Basically, logits are just another way for us to represent probabilities.</p>
+									
+									<p><span class="image left"><img src="images/Logit-vs-probit-models-300x201.png" alt="" width="400" height="215"/></span>&emsp;&emsp;Berkson had developed this new unit of measurement for use in logistic models as an alternative to a popular model at the time, the probit model. Interestingly, the probit model bears striking similarities with the logistic model, and both models often reach the same conclusion despite their methods being different. As time went on however, logistic models gradually gained favour over probit models due to their ease of computation and better interpretability, characteristics which can still be observed even in modern data analytics. <a href="#n3456"><b>[3]</b></a></p>
+									<p id="5">&emsp;&emsp;On the other hand, using the word ‘regression’ to describe certain techniques comes from another side story in the history of mathematics. This time from the famous mathematician and half-cousin of Charles Darwin, Sir Francis Galton. Galton used this term to describe how the heights of the descendants from both extremely tall and extremely short ancestors tended to become more average over time (i.e. children of very tall parents tended to still be tall but less so than their parents, while very short ancestors would often have short but not as short descendants). <a href="#n3456"><b>[4]</b></a></p>
+									<p>&emsp;&emsp;This ‘regression to the mean’ intrigued Galton, and he worked to quantify the extent of this regression. He did so by attempting to find the equation of the line of best-fit through the data that minimized a pre-defined error function, thereby inventing linear regression analysis as we know it today. <a href="#n3456"><b>[5]</b></a></p>
+									<p style="text-align:center;"><span class="image fit"><img src="images/galton regression.PNG" alt="Galton's Regression to the Mean" width="400" height="400"/></span></span></p>
+									<p>&emsp;&emsp;So with all that said, where does logistic regression lie in all of this? Well, logistic regression algorithms use the logistic model we described earlier and attempts to apply regression techniques on it in order to approximate the mapping function that maps the input variables into an output, which comes in the form of a probability for each output category in the problem.</p>
+									<p>&emsp;&emsp;Crucially, those output probabilities are continuous. So, from our earlier definition of regression algorithms, we can conclude that logistic regression is in fact a regression algorithm with full confidence.</p>
+									<p>&emsp;&emsp;Now… why do we call it a classifier?</p>
+
+									<h3>A Consequence of Brevity</h3>
+									<p>&emsp;&emsp;The reason for this strangeness is largely due to us data scienctists and analyst being lazy with our terminology. While it is true that logistic regression is a statistical method for regression, the most common way logistic regression is used to solve real-world problems <i>is</i> as a classifier.</p>
+									<p>&emsp;&emsp;Remember how logistic regression at its base is supposed to return a list of continuous probabilities for each output category in the problem? Turns out continuous probabilities, while no doubt interesting, aren’t really that useful for providing a definitive answer to questions we encounter in real life. </p>
+									<p>&emsp;&emsp;For example, what does it mean if there is a 0.6743 chance that it will rain tommorow? Certainly, you might say ‘Well, that just means its probably going to rain tommorow!’ but how then would we convey that information to the hundreds of people eagerly waiting their weather report? If you were to tell them that there is about a 67% chance that it would rain tommorow, regardless of what happens tommorow, how would anyone know whether or not you were right? Besides, I doubt your boss would be too happy if you gave them a cryptic number as your weather report. </p>
+									<p>&emsp;&emsp;To avoid an unhappy boss and to keep your job, this often means that we have to add on an additional classification rule to our logistic regression algorithm in order to classify the results based on the probability obtained. For example, in a simple scenario where there are only two output categories, the rule might be:</p>
+									<p style="text-align:center;"><span class="image"><img src="images/piecewise function.PNG" alt="Sample Piecewise Function" width="200" height="80"/></span></span></p>
+									<p id="6">&emsp;&emsp;Other times, there is a more practical reason for using an additional classification rule, such as when the output of the logistic regression will be used in other calculations or models that do not accept probabilities as inputs or if accepting continuous probabilities as input would complicate calculations.</p>
+									<p>&emsp;&emsp;An example of this is in ensemble modelling, where mulitiple different types of models are used with multiple different datasets (these models are known as an ‘ensemble’), in order to form predictions. Where the outputs of the logistic regression model will potentially have to be fed into another model, thus restricting the format of its outputs. <a href="#n3456"><b>[6]</b></a></p>
+									<p style="text-align:center;"><span class="image"><img src="images/modelstacking.png" alt="Ensemble Modelling" width="450" height="400"/></span></span></p>
+
+									<h3>Conclusion</h3>
+									<p>&emsp;&emsp;So to conclude our long-winded journey, logistic regression as it is commonly used in the field of data science and analytics, truly is a classification algorithm. But that statement doesn’t quite capture the whole situation, much to the chagrin of mathematicians and statisticians alike.</p>
+									<p>&emsp;&emsp;When people say that logistic regression is a classification algorithm, they typically omit the crucial part in their definition that makes it valid. Specifically, they generally mean that if we add on a classification rule onto a logistic regression algorithm, the result is that of a classification algorithm. Now, while that statement is valid and should hopefully not send any passing statistician into cardiac arrest, it is quite the mouthful!</p>
+									<p>&emsp;&emsp;This is most likely the reason why we often see logistic regression listed as a classification algorithm, because for our purposes it very well is! And I suppose between bogging down everyone in mathematical rigour or making a misleading statement, the larger analytics community has already made their choice.</p>
+									<p  id="n1">&emsp;&emsp;With that, we arrive at the end of this little analytics rabbit hole. I hope you learned something new or at the very least enjoyed the past 7 or so minutes of your life, because you certainly aren’t getting them back. Cheers, and have a good one!</p>
+
+									<h3>Additional Notes:</h3>
+									<p id="n2"><a href="#1"><b>[1]</b></a> Please note that the author means no offense to the websites listed here, as the whole point of this article is to show that logistic regression often times is indeed a classifier, and any ‘misclassifications’ of logistic regression are usually due to the widespread propagation of a confusing but handy shorthand. Regardless, the sources of these websites have been omitted.</p>
+									<p id="n3456"><a href="#2"><b>[2]</b></a> For those knowledgeable on mathematical functions, you may have noticed that the ‘logarithmic’ function depicted in Verhulst’s work isn’t even the logarithmic function! In fact, it actually appears to be an exponential function. The reason for his use of terminology here is, to my knowledge, unknown. Additionally, it should be noted that the logistic function depicted here has a variable asymptote, unlike the version we usually encounter in logistic regression that has an asymptote at 0 and 1, though this is more of a consequence of it being in its early stages of development than Verhulst’s mysterious naming sense. <a href="https://eudml.org/doc/182533" target="_blank">(Image source: https://eudml.org/doc/182533)</a></p>
+									<p><a href="#3&4"><b>[3]</b></a> <a href="https://vitalflux.com/logit-vs-probit-models-differences-examples/" target="_blank">Image source: https://vitalflux.com/logit-vs-probit-models-differences-examples/</a></p>
+									<p><a href="#3&4"><b>[4]</b></a> As a fun side story, some of you may know that Galton was a staunch proponent of the field of eugenics and his work in regression was in part motivated by a desire to quantify the extent that hereditary factors could influence human achievement. This would lead him to build a very different model of inheritance compared to the one proposed by Mendel (whose theories we use to this day), one that <i>kinda</i> supported scientific racism and <i>sorta</i> attempted to justify genocide. Needless to say, Galton’s theories in those regards are far less popular today.</p>
+									<p><a href="#5"><b>[5]</b></a> <a href="https://galton.org/essays/1880-1889/galton-1886-jaigi-regression-stature.pdf" target="_blank">Image source: https://galton.org/essays/1880-1889/galton-1886-jaigi-regression-stature.pdf</a></p>
+									<p><a href="#6"><b>[6]</b></a> <a href="https://blogs.sas.com/content/subconsciousmusings/2017/05/18/stacked-ensemble-models-win-data-science-competitions/" target="_blank">Image source: https://blogs.sas.com/content/subconsciousmusings/2017/05/18/stacked-ensemble-models-win-data-science-competitions/</a></p>
+
+                                </div>
+							</div>
+
+					</section>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="inner">
+							<h2 class="major">Get in touch</h2>
+							<p>Cras mattis ante fermentum, malesuada neque vitae, eleifend erat. Phasellus non pulvinar erat. Fusce tincidunt, nisl eget mattis egestas, purus ipsum consequat orci, sit amet lobortis lorem lacus in tellus. Sed ac elementum arcu. Quisque placerat auctor laoreet.</p>
+							<form method="post" action="#">
+								<div class="fields">
+									<div class="field">
+										<label for="name">Name</label>
+										<input type="text" name="name" id="name" />
+									</div>
+									<div class="field">
+										<label for="email">Email</label>
+										<input type="email" name="email" id="email" />
+									</div>
+									<div class="field">
+										<label for="message">Message</label>
+										<textarea name="message" id="message" rows="4"></textarea>
+									</div>
+								</div>
+								<ul class="actions">
+									<li><input type="submit" value="Send Message" /></li>
+								</ul>
+							</form>
+							<ul class="contact">
+								<li class="icon solid fa-home">
+									Untitled Inc<br />
+									1234 Somewhere Road Suite #2894<br />
+									Nashville, TN 00000-0000
+								</li>
+								<li class="icon solid fa-phone">(000) 000-0000</li>
+								<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
+								<li class="icon brands fa-twitter"><a href="#">twitter.com/untitled-tld</a></li>
+								<li class="icon brands fa-facebook-f"><a href="#">facebook.com/untitled-tld</a></li>
+								<li class="icon brands fa-instagram"><a href="#">instagram.com/untitled-tld</a></li>
+							</ul>
+							<ul class="copyright">
+								<li>&copy; Untitled Inc. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
