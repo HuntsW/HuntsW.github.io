@@ -33,7 +33,6 @@
 							<ul class="links">
 								<li><a href="index.html">Home</a></li>
 								<li><a href="projects.html">Projects</a></li>
-								<li><a href="elements.html">Elements</a></li>
 							</ul>
 							<a href="#" class="close">Close</a>
 						</div>
@@ -55,7 +54,7 @@
                                 <div class="inner">
                                     <h3>Introduction</h3>
                                     <p id="1">&emsp;&emsp;When introducing machine learning models to newcomers, we often begin by showing the fine distinction between classification and regression algorithms, and following up by giving some examples and maybe even demonstrations of models that fall under those two groupings. Most commonly, we begin this discussion with the linear and logistic regression models as an example for regression and classification algorithms respectively.</p>
-                                    <div class="col-12"><span class="image fit"><img src="images/captures.PNG" alt="Incorrect classification?" /></span></div>
+                                    <div class="col-12"><span class="image"><img src="images/captures.PNG" alt="Incorrect classification?" /></span></div>
                                     <p>&emsp;&emsp;It is at this point that the newcomers reach a rather strange aspect of modelling in data science and analytics, that is – how on Earth are linear <b>regression</b> and logistic <b>regression</b> not both regression algorithms?! In fact, many sources online will simply introduce logistic regression as a classification algorithm and give no further explanation as to why that is the case. <a href="#n1"><b>[1]</b></a></p>
                                     <p>&emsp;&emsp;This article seeks to put this inconsistency to rest, and hopefully we can all walk away with a better appreciation for what goes on under the hood when you call LogisticRegression() from your preferred library.</p>
 
@@ -72,12 +71,12 @@
                                     <p>&emsp;&emsp;Other than that, there really isn’t much else to distinguish regression and classification algorithms. Although depending on your definitions, some overlap may exist between the two groups, as we will soon see in the case of logistic regression.</p>
 
 									<h3>What is Logistic Regression?</h3>
-									<p><span class="image right"><img src="images/PPN129323640_0018-55_page-0001.jpg" alt="" width="360" height="420"/></span>&emsp;&emsp;Now to understand what logistic regression is, let’s first try to parse out what each word in the phrase means. This, as you will soon see, leads us into a surprisingly messy and intriguing tale of 19th and 20th century mathematics.</p>
+									<p><span class="image right"><img src="images/PPN129323640_0018-55_page-0001.jpg" alt="Logistique function" width="360" height="420"/></span>&emsp;&emsp;Now to understand what logistic regression is, let’s first try to parse out what each word in the phrase means. This, as you will soon see, leads us into a surprisingly messy and intriguing tale of 19th and 20th century mathematics.</p>
 									<p id="2">&emsp;&emsp;The logistic function and the term ‘logistic’ were first used in a series of papers by French mathematician Pierre Francois Verhulst, as a means to mathematically describe the growth of a population under resource constraints.</p>
-									<p>&emsp;&emsp;Strangely, Verhulst never did provide any reason for choosing the word ‘logistique’ which seems to have etymological ties with the Greek word for logic. Leading many to hypothesize that it was simply chosen as a way to contrast it with the ‘logarithmique’ function that he uses to describe population growth without resource constraints, as well as to passive aggressively call such a growth pattern illogical. <a href="#n2"><b>[2]</b></a></p>
+									<p>&emsp;&emsp;Strangely, Verhulst never did provide any reason for choosing the word ‘logistique’ which seems to have etymological ties with the Greek word for logic. This lead many to hypothesize that it was simply chosen as a way to contrast it with the ‘logarithmique’ function that he uses to describe population growth without resource constraints, as well as to passive aggressively call such a growth pattern illogical. <a href="#n2"><b>[2]</b></a></p>
 									<p id="3&4">&emsp;&emsp;Despite this shaky foundation, the name stuck. Eventually, another mathematician by the name of Joseph Berkson, would build upon the logistic function to create a unit of measurement known as log-odds or logits (logistic units). This is done by taking the inverse of the logistic function in order to turn probability values that range from 0 to 1 into real numbers that range from -∞ to +∞. Basically, logits are just another way for us to represent probabilities.</p>
 									
-									<p><span class="image left"><img src="images/Logit-vs-probit-models-300x201.png" alt="" width="400" height="215"/></span>&emsp;&emsp;Berkson had developed this new unit of measurement for use in logistic models as an alternative to a popular model at the time, the probit model. Interestingly, the probit model bears striking similarities with the logistic model, and both models often reach the same conclusion despite their methods being different. As time went on however, logistic models gradually gained favour over probit models due to their ease of computation and better interpretability, characteristics which can still be observed even in modern data analytics. <a href="#n3456"><b>[3]</b></a></p>
+									<p><span class="image left"><img src="images/Logit-vs-probit-models-300x201.png" alt="Logit vs Probit" width="400" height="215"/></span>&emsp;&emsp;Berkson had developed this new unit of measurement for use in logistic models as an alternative to a popular model at the time, the probit model. Interestingly, the probit model bears striking similarities with the logistic model, and both models often reach the same conclusion despite their methods being different. As time went on however, logistic models gradually gained favour over probit models due to their ease of computation and better interpretability, characteristics which can still be observed even in modern data analytics. <a href="#n3456"><b>[3]</b></a></p>
 									<p id="5">&emsp;&emsp;On the other hand, using the word ‘regression’ to describe certain techniques comes from another side story in the history of mathematics. This time from the famous mathematician and half-cousin of Charles Darwin, Sir Francis Galton. Galton used this term to describe how the heights of the descendants from both extremely tall and extremely short ancestors tended to become more average over time (i.e. children of very tall parents tended to still be tall but less so than their parents, while very short ancestors would often have short but not as short descendants). <a href="#n3456"><b>[4]</b></a></p>
 									<p>&emsp;&emsp;This ‘regression to the mean’ intrigued Galton, and he worked to quantify the extent of this regression. He did so by attempting to find the equation of the line of best-fit through the data that minimized a pre-defined error function, thereby inventing linear regression analysis as we know it today. <a href="#n3456"><b>[5]</b></a></p>
 									<p style="text-align:center;"><span class="image fit"><img src="images/galton regression.PNG" alt="Galton's Regression to the Mean" width="400" height="400"/></span></span></p>
@@ -112,48 +111,6 @@
                                 </div>
 							</div>
 
-					</section>
-
-				<!-- Footer -->
-					<section id="footer">
-						<div class="inner">
-							<h2 class="major">Get in touch</h2>
-							<p>Cras mattis ante fermentum, malesuada neque vitae, eleifend erat. Phasellus non pulvinar erat. Fusce tincidunt, nisl eget mattis egestas, purus ipsum consequat orci, sit amet lobortis lorem lacus in tellus. Sed ac elementum arcu. Quisque placerat auctor laoreet.</p>
-							<form method="post" action="#">
-								<div class="fields">
-									<div class="field">
-										<label for="name">Name</label>
-										<input type="text" name="name" id="name" />
-									</div>
-									<div class="field">
-										<label for="email">Email</label>
-										<input type="email" name="email" id="email" />
-									</div>
-									<div class="field">
-										<label for="message">Message</label>
-										<textarea name="message" id="message" rows="4"></textarea>
-									</div>
-								</div>
-								<ul class="actions">
-									<li><input type="submit" value="Send Message" /></li>
-								</ul>
-							</form>
-							<ul class="contact">
-								<li class="icon solid fa-home">
-									Untitled Inc<br />
-									1234 Somewhere Road Suite #2894<br />
-									Nashville, TN 00000-0000
-								</li>
-								<li class="icon solid fa-phone">(000) 000-0000</li>
-								<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
-								<li class="icon brands fa-twitter"><a href="#">twitter.com/untitled-tld</a></li>
-								<li class="icon brands fa-facebook-f"><a href="#">facebook.com/untitled-tld</a></li>
-								<li class="icon brands fa-instagram"><a href="#">instagram.com/untitled-tld</a></li>
-							</ul>
-							<ul class="copyright">
-								<li>&copy; Untitled Inc. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-							</ul>
-						</div>
 					</section>
 
 			</div>
